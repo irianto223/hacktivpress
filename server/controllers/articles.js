@@ -88,5 +88,24 @@ module.exports = {
     .catch(err => {
       res.send(err)
     })
+  },
+  editArticle: (req, res) => {
+    Article.update({
+      _id: req.params.id
+    }, {
+      title: req.body.title,
+      content: req.body.content,
+      category: req.body.category,
+      author: req.body.author
+    })
+    .then(data => {
+      res.send({
+        msg: 'data updated',
+        data: data
+      })
+    })
+    .catch(err => {
+      res.send(err)
+    })
   }
 }
