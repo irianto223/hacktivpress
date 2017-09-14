@@ -5,21 +5,28 @@ require('dotenv').config()
 
 module.exports = {
   createArticle: (req, res) => {
-    Article.create({
-      title: req.body.title,
-      content: req.body.content,
-      category: req.body.category,
-      author: req.body.author
-    })
-    .then(data => {
-      res.send({
-        msg: 'data created',
-        data: data
+    if (req.headers.token) {
+      Article.create({
+        title: req.body.title,
+        content: req.body.content,
+        category: req.body.category,
+        author: req.body.author
       })
-    })
-    .catch(err => {
-      res.send(err)
-    })
+      .then(data => {
+        res.send({
+          msg: 'data created',
+          data: data
+        })
+      })
+      .catch(err => {
+        res.send(err)
+      })
+    }
+    else {
+      res.send({
+        msg: 'unauthenticated'
+      })
+    }
   },
   getAllArticles: (req, res) => {
     Article.find({})
