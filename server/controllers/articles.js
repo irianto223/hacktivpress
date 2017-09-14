@@ -83,36 +83,80 @@ module.exports = {
     })
   },
   deleteArticle: (req, res) => {
-    Article.remove({
-      _id: req.params.id
-    })
-    .then(data => {
+    if (req.headers.token == null) {
       res.send({
-        msg: 'data removed',
-        data: data
+        msg: 'unauthenticated'
       })
-    })
-    .catch(err => {
-      res.send(err)
-    })
+    }
+    else {
+      let decoded = jwt.verify(req.headers.token, process.env.TOKEN_SECRET)
+
+      Article.findOne({
+        _id: req.params.id
+      })
+      .then(data => {
+        if (data.author != decoded.id) {
+          res.send({
+            msg: 'unauthorized'
+          })
+        }
+        else {
+          Article.remove({
+            _id: req.params.id
+          })
+          .then(data => {
+            res.send({
+              msg: 'data removed',
+              data: data
+            })
+          })
+          .catch(err => {
+            res.send(err)
+          })
+        }
+      })
+      .catch(err => {
+        res.send(err)
+      })
+    }
   },
   editArticle: (req, res) => {
-    Article.update({
-      _id: req.params.id
-    }, {
-      title: req.body.title,
-      content: req.body.content,
-      category: req.body.category,
-      author: req.body.author
-    })
-    .then(data => {
+    if (req.headers.token == null) {
       res.send({
-        msg: 'data updated',
-        data: data
+        msg: 'unauthenticated'
       })
-    })
-    .catch(err => {
-      res.send(err)
-    })
+    }
+    else {
+      let decoded = jwt.verify(req.headers.token, process.env.TOKEN_SECRET)
+
+      Article.findOne({
+        _id: req.params.id
+      })
+      .then(data => {
+        if (data.author != decoded.id) {
+          res.send({
+            msg: 'unauthorized'
+          })
+        }
+        else {
+          Article.update({
+            _id: req.params.id
+          }, {
+            title: req.body.title,
+            content: req.body.content,
+            category: req.body.category
+          })
+          .then(data => {
+            res.send({
+              msg: 'data updated',
+              data: data
+            })
+          })
+          .catch(err => {
+            res.send(err)
+          })
+        }
+      })
+    }
   }
 }
