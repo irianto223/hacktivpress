@@ -6,5 +6,6 @@ router.post('/', article.createArticle)
 router.get('/', article.getAllArticles)
 router.get('/:id', article.getArticleById)
 router.get('/author/:id', article.getArticlesByAuthor)
+router.post('/category/', article.getArticlesByCategory)
 
 module.exports = router

@@ -60,5 +60,19 @@ module.exports = {
     .catch(err => {
       res.send(err)
     })
+  },
+  getArticlesByCategory: (req, res) => {
+    Article.find({
+      category: req.body.category
+    })
+    .then(data =>{
+      res.send({
+        msg: 'data found',
+        data: data
+      })
+    })
+    .catch(err => {
+      res.send(err)
+    })
   }
 }
