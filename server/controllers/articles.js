@@ -32,5 +32,19 @@ module.exports = {
     .catch(err => {
       res.send(err)
     })
+  },
+  getArticleById: (req, res) => {
+    Article.findOne({
+      _id: req.params.id
+    })
+    .then(data => {
+      res.send({
+        msg: 'data found',
+        data: data
+      })
+    })
+    .catch(err => {
+      res.send(err)
+    })
   }
 }
