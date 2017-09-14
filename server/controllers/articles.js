@@ -22,6 +22,15 @@ module.exports = {
     })
   },
   getAllArticles: (req, res) => {
-    // 
+    Article.find({})
+    .then(data => {
+      res.send({
+        msg: 'data found',
+        data: data
+      })
+    })
+    .catch(err => {
+      res.send(err)
+    })
   }
 }
