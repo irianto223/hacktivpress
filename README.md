@@ -28,4 +28,4 @@ $ npm run dev
 | GET | /articles | Mendapatkan data seluruh artikel  |
 | POST | /articles | Membuat artikel baru |
 | DELETE | /articles/:id | Menghapus artikel berdasarkan ID |
-| PUT | /articles/:id
+| PUT | /articles/:id | Mengupdate artikel berdasarkan ID |
