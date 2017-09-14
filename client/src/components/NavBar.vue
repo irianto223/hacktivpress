@@ -1,5 +1,5 @@
-<template lang="html">
-  <div class="">
+<template>
+  <div>
     <ul>
       <li><a href="#">Home</a></li>
     </ul>
@@ -14,5 +14,5 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style>
 </style>
