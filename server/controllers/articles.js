@@ -74,5 +74,19 @@ module.exports = {
     .catch(err => {
       res.send(err)
     })
+  },
+  deleteArticle: (req, res) => {
+    Article.remove({
+      _id: req.params.id
+    })
+    .then(data => {
+      res.send({
+        msg: 'data removed',
+        data: data
+      })
+    })
+    .catch(err => {
+      res.send(err)
+    })
   }
 }
