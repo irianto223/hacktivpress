@@ -1,7 +1,10 @@
 <template>
   <div>
     <NavBar></NavBar>
-    <p v-for="article in allArticles"></p>
+    <div v-for="article in allArticles">
+      <h3>{{ article.title }}</h3>
+      <p>{{ article.content }}</p>
+    </div>
   </div>
 </template>
 

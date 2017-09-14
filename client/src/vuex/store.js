@@ -4,7 +4,6 @@ import axios from 'axios'
 // import router from '../src/router/index'
 Vue.use(Vuex)
 
-
 var state = {
   allArticles: []
 }
